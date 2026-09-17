@@ -349,6 +349,86 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
 
 .contact-item { display: flex; align-items: center; gap: 14px; font-size: 1.05rem; margin-bottom: 20px; }
 
+/* Inquiry form */
+.inquiry-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .inquiry-layout { grid-template-columns: 1fr; }
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 560px) {
+  .form-row-2 { grid-template-columns: 1fr; }
+}
+
+.form-field { margin-bottom: 22px; }
+
+.form-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.form-field .optional-tag { color: var(--muted); font-weight: 400; font-size: 12px; }
+.form-field .required-tag { color: var(--accent); }
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="url"],
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(216, 90, 48, 0.15);
+}
+
+.form-field textarea { resize: vertical; min-height: 110px; }
+
+.checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+
+.checkbox-row { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 400; }
+.checkbox-row input { width: 17px; height: 17px; accent-color: var(--accent); }
+
+.form-status {
+  display: none;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-status.is-success { display: block; background: #eaf3ea; color: #1f6b1f; border: 1px solid #c9e2c9; }
+.form-status.is-error { display: block; background: #fbeae8; color: #a13327; border: 1px solid #f2c4bd; }
+
+.inquiry-sidebar h2 { font-size: 1.3rem; margin-bottom: 20px; }
+.inquiry-sidebar .contact-item { font-size: 1rem; }
+
 footer {
   border-top: 1px solid var(--border);
   padding: 32px 0;

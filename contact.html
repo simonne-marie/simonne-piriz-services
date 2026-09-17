@@ -33,9 +33,92 @@
 
 <section class="reveal">
   <div class="wrap">
-    <div class="contact-grid">
+    <div class="inquiry-layout">
       <div>
-        <h2 class="heading" style="font-size: 1.4rem; margin-bottom: 24px;">Get in touch</h2>
+        <h2 class="heading" style="font-size: 1.6rem; margin-bottom: 8px;">Tell me about your business</h2>
+        <p style="color: var(--muted); margin-bottom: 32px;">The more you share, the more useful the first conversation is. Every field below except Email and Company name is optional.</p>
+
+        <form id="inquiry-form" novalidate>
+          <div class="form-row-2">
+            <div class="form-field">
+              <label for="firstname">First name</label>
+              <input type="text" id="firstname" name="0-1/firstname" autocomplete="given-name">
+            </div>
+            <div class="form-field">
+              <label for="lastname">Last name</label>
+              <input type="text" id="lastname" name="0-1/lastname" autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email <span class="required-tag">*</span></label>
+            <input type="email" id="email" name="0-1/email" autocomplete="email" required>
+          </div>
+
+          <div class="form-field">
+            <label for="company">Company name <span class="required-tag">*</span></label>
+            <input type="text" id="company" name="0-2/name" autocomplete="organization" required>
+          </div>
+
+          <div class="form-field">
+            <label for="website">Current website URL <span class="optional-tag">(optional)</span></label>
+            <input type="url" id="website" name="0-2/website" autocomplete="url" placeholder="https://">
+          </div>
+
+          <div class="form-field">
+            <label for="need">What do you need help with? <span class="optional-tag">(optional)</span></label>
+            <textarea id="need" name="0-1/strong_what_do_you_need_help_with___strong_" placeholder="Tell me what's not getting done right now."></textarea>
+          </div>
+
+          <div class="form-field">
+            <label>Which service(s) are you interested in? <span class="optional-tag">(optional)</span></label>
+            <div class="checkbox-group">
+              <label class="checkbox-row"><input type="checkbox" name="services" value="Website Design & Management"> Website Design &amp; Management</label>
+              <label class="checkbox-row"><input type="checkbox" name="services" value="Content & Blog Management"> Content &amp; Blog Management</label>
+              <label class="checkbox-row"><input type="checkbox" name="services" value="Social Media Management"> Social Media Management</label>
+              <label class="checkbox-row"><input type="checkbox" name="services" value="Not sure yet."> Not sure yet</label>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-field">
+              <label for="company_size">Company size <span class="optional-tag">(optional)</span></label>
+              <select id="company_size" name="0-1/company_size">
+                <option value="">Select one</option>
+                <option value="Just me">Just me</option>
+                <option value="2-10">2–10</option>
+                <option value="11-50">11–50</option>
+                <option value="50+">50+</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="timeline">Timeline <span class="optional-tag">(optional)</span></label>
+              <select id="timeline" name="0-1/timeline">
+                <option value="">Select one</option>
+                <option value="ASAP">ASAP</option>
+                <option value="Next 1-3 months">Next 1–3 months</option>
+                <option value="Just exploring">Just exploring</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="industry">Industry <span class="optional-tag">(optional)</span></label>
+            <input type="text" id="industry" name="0-1/industry">
+          </div>
+
+          <div class="form-field">
+            <label for="source">How did you hear about us? <span class="optional-tag">(optional)</span></label>
+            <input type="text" id="source" name="0-1/strong_how_did_you_hear_about_us___strong__nbsp_">
+          </div>
+
+          <button type="submit" class="btn" id="inquiry-submit">Send It Over</button>
+          <div class="form-status" id="inquiry-status" role="status"></div>
+        </form>
+      </div>
+
+      <div class="inquiry-sidebar">
+        <h2 class="heading">Get in touch directly</h2>
         <div class="contact-item">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="oklch(68% 0.19 40)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
           <a href="mailto:simonnemv@gmail.com">simonnemv@gmail.com</a>
@@ -49,26 +132,31 @@
           <a href="https://www.linkedin.com/in/simonnepiriz/" target="_blank" rel="noopener">linkedin.com/in/simonnepiriz</a>
         </div>
       </div>
-      <div>
-        <h2 class="heading" style="font-size: 1.4rem; margin-bottom: 24px;">How it works</h2>
-        <div class="process-step" style="margin-bottom: 20px;">
-          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.6 8.6 0 0 1-3.5-.7L3 20l1-4.5a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 12 3.2a8.4 8.4 0 0 1 9 8.3z"/></svg></div>
-          <div class="num" style="font-size: 1.5rem;">01</div>
-          <h3>Free consultation</h3>
-          <p>We talk through what's not getting done and whether this is a fit.</p>
-        </div>
-        <div class="process-step" style="margin-bottom: 20px;">
-          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.3-.7-.7-2.3z"/></svg></div>
-          <div class="num" style="font-size: 1.5rem;">02</div>
-          <h3>Setup</h3>
-          <p>Your site, content plan, or social cadence gets built around your business.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.4"/><path d="M4 13a8 8 0 0 0 14.6 4.4"/><path d="M4 4v4.5h4.5"/><path d="M20 20v-4.5h-4.5"/></svg></div>
-          <div class="num" style="font-size: 1.5rem;">03</div>
-          <h3>Ongoing management</h3>
-          <p>Everything runs on a regular cadence, with your approval before anything goes live.</p>
-        </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt reveal">
+  <div class="wrap">
+    <h2 class="heading section-title" style="font-size: 1.8rem;">How it works</h2>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.6 8.6 0 0 1-3.5-.7L3 20l1-4.5a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 12 3.2a8.4 8.4 0 0 1 9 8.3z"/></svg></div>
+        <div class="num" style="font-size: 1.5rem;">01</div>
+        <h3>Free consultation</h3>
+        <p>We talk through what's not getting done and whether this is a fit.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.3-.7-.7-2.3z"/></svg></div>
+        <div class="num" style="font-size: 1.5rem;">02</div>
+        <h3>Setup</h3>
+        <p>Your site, content plan, or social cadence gets built around your business.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.4"/><path d="M4 13a8 8 0 0 0 14.6 4.4"/><path d="M4 4v4.5h4.5"/><path d="M20 20v-4.5h-4.5"/></svg></div>
+        <div class="num" style="font-size: 1.5rem;">03</div>
+        <h3>Ongoing management</h3>
+        <p>Everything runs on a regular cadence, with your approval before anything goes live.</p>
       </div>
     </div>
   </div>

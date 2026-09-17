@@ -10,15 +10,15 @@
 <body>
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="index.html">
+    <a class="logo" href="/">
       <span class="logo-name">Simonne Piriz Studio</span>
       <span class="logo-tagline">Marketing, run like it's your job</span>
     </a>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="services.html" class="current">Services</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="/">Home</a>
+      <a href="/services" class="current">Services</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -39,7 +39,7 @@
       <h3>Website Design & Management</h3>
       <p>A professionally designed site built around your actual business, then kept current instead of going stale the way most small business websites do.</p>
       <ul>
-        <li>Custom design and build, not a generic template</li>
+        <li>Custom design and build, tailored to your business</li>
         <li>Ongoing updates: new pages, new offers, new content</li>
         <li>Fixes and improvements handled without you having to ask</li>
         <li>Fast, secure, mobile-friendly hosting included</li>
@@ -72,10 +72,112 @@
   </div>
 </section>
 
+<section class="alt reveal" id="investment">
+  <div class="wrap">
+    <div class="section-label">The Investment</div>
+    <h2 class="heading section-title" style="font-size: 2.2rem;">Build your own package.</h2>
+    <p class="section-lede">Select what you need and how you'd like it managed. The number below updates as you go, no call required to get a starting point.</p>
+
+    <div class="calc" id="investment-calc">
+      <div class="calc-service" data-service="website">
+        <label class="calc-service-toggle">
+          <input type="checkbox" class="calc-include" data-service="website">
+          <span class="calc-service-name">Website Design &amp; Management</span>
+        </label>
+        <div class="calc-options" hidden>
+          <div class="calc-option-group">
+            <span class="calc-option-label">Build complexity</span>
+            <div class="pill-group">
+              <label class="pill"><input type="radio" name="website-tier" value="standard" checked>Standard</label>
+              <label class="pill"><input type="radio" name="website-tier" value="premium">Premium <span class="pill-note">elaborate animation &amp; interactivity</span></label>
+            </div>
+          </div>
+          <div class="calc-option-group">
+            <span class="calc-option-label">How should this be managed?</span>
+            <div class="pill-group">
+              <label class="pill"><input type="radio" name="website-path" value="monthly" checked>Monthly Retainer</label>
+              <label class="pill"><input type="radio" name="website-path" value="quarterly">Quarterly Sprint</label>
+              <label class="pill"><input type="radio" name="website-path" value="handoff">Build &amp; Handoff</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-service" data-service="content">
+        <label class="calc-service-toggle">
+          <input type="checkbox" class="calc-include" data-service="content">
+          <span class="calc-service-name">Content &amp; Blog Management</span>
+        </label>
+        <div class="calc-options" hidden>
+          <div class="calc-option-group">
+            <span class="calc-option-label">How should this be managed?</span>
+            <div class="pill-group">
+              <label class="pill"><input type="radio" name="content-path" value="monthly" checked>Monthly Retainer</label>
+              <label class="pill"><input type="radio" name="content-path" value="quarterly">Quarterly Sprint</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-service" data-service="social">
+        <label class="calc-service-toggle">
+          <input type="checkbox" class="calc-include" data-service="social">
+          <span class="calc-service-name">Social Media Management</span>
+        </label>
+        <div class="calc-options" hidden>
+          <div class="calc-option-group">
+            <span class="calc-option-label">How should this be managed?</span>
+            <div class="pill-group">
+              <label class="pill"><input type="radio" name="social-path" value="monthly" checked>Monthly Retainer</label>
+              <label class="pill"><input type="radio" name="social-path" value="quarterly">Quarterly Sprint</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-addons">
+        <h3>Add-ons</h3>
+        <div class="calc-addon-row">
+          <label for="addon-posts">Extra blog posts <span class="optional-tag">$175 each, per month</span></label>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease">&minus;</button>
+            <input type="number" id="addon-posts" class="calc-addon" data-addon="extraPosts" value="0" min="0" max="20" readonly>
+            <button type="button" class="qty-btn" data-step="1" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <label class="checkbox-row"><input type="checkbox" class="calc-addon" data-addon="extraPlatform"> Additional social platform <span class="optional-tag">+$200/mo</span></label>
+        <label class="checkbox-row"><input type="checkbox" class="calc-addon" data-addon="rushSetup"> Rush setup <span class="optional-tag">+20% of one-time cost</span></label>
+        <label class="checkbox-row"><input type="checkbox" class="calc-addon" data-addon="brandVoiceDoc"> Brand voice / copy deep-dive doc <span class="optional-tag">+$300 one-time</span></label>
+        <label class="checkbox-row"><input type="checkbox" class="calc-addon" data-addon="newsletter"> Email newsletter management <span class="optional-tag">+$300/mo</span></label>
+      </div>
+
+      <div class="calc-summary" id="calc-summary">
+        <div class="calc-summary-empty" id="calc-empty">Select a service above to see your investment.</div>
+        <div class="calc-summary-lines" id="calc-lines" hidden>
+          <div class="calc-summary-line" id="calc-line-onetime" hidden>
+            <span>One-time</span>
+            <strong id="calc-onetime">$0</strong>
+          </div>
+          <div class="calc-summary-line" id="calc-line-monthly" hidden>
+            <span>Monthly</span>
+            <strong id="calc-monthly">$0/mo</strong>
+          </div>
+          <div class="calc-summary-line" id="calc-line-quarterly" hidden>
+            <span>Quarterly</span>
+            <strong id="calc-quarterly">$0/quarter</strong>
+          </div>
+          <p class="calc-discount-note" id="calc-discount-note" hidden></p>
+        </div>
+        <a class="btn" href="/contact" id="calc-cta">Get This Package</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="cta-banner">
   <div class="wrap">
     <h2 class="heading">Not sure which one you need?</h2>
-    <a class="btn" href="contact.html">Let's Figure It Out Together</a>
+    <a class="btn" href="/contact">Let's Figure It Out Together</a>
   </div>
 </div>
 

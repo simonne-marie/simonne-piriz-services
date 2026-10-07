@@ -1,0 +1,31 @@
+name: Slack card
+# Vinny, the review card for site updates. A PR gets a card in Slack; pushes, comments,
+# reviews and the merge are posted into the card's thread. Merging to main is what
+# Cloudflare publishes to simonnemarie.com.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, closed]
+  issue_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+jobs:
+  card:
+    # Skip comments on plain issues, and the bot's own marker comment.
+    if: >-
+      (github.event_name != 'issue_comment' || github.event.issue.pull_request) &&
+      github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node .github/slack-card.mjs
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

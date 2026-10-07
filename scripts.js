@@ -92,6 +92,15 @@ if (calcRoot) {
     social: { setup: 350, monthly: 750, quarterly: 1350 },
   };
 
+  const SEATS = {
+    crm: { label: "CRM & Automation Specialist", setup: 750, monthly: 350 },
+    designer: { label: "Visual Designer", monthly: 300 },
+    intel: { label: "Competitive Intelligence Analyst", monthly: 250 },
+    reporting: { label: "Reporting Analyst", monthly: 200 },
+    retention: { label: "Customer Retention Analyst", monthly: 300 },
+    docs: { label: "Training & Docs Builder", setup: 500 },
+  };
+
   const fmt = (n) => `$${Math.round(n).toLocaleString()}`;
 
   const qtyInput = document.getElementById("addon-posts");
@@ -112,8 +121,17 @@ if (calcRoot) {
     });
   });
 
-  calcRoot.querySelectorAll('input[type="radio"], .calc-addon[type="checkbox"]').forEach((el) => {
+  calcRoot.querySelectorAll('input[type="radio"], .calc-addon[type="checkbox"], .calc-seat').forEach((el) => {
     el.addEventListener("change", recalc);
+  });
+
+  const seatCards = document.querySelectorAll(".org-seat-open[data-seat]");
+  seatCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const box = calcRoot.querySelector(`.calc-seat[data-seat="${card.dataset.seat}"]`);
+      box.checked = !box.checked;
+      recalc();
+    });
   });
 
   function recalc() {
@@ -204,9 +222,24 @@ if (calcRoot) {
       addonDescs.push("a brand voice / copy deep-dive document");
     }
 
+    const seatLabels = [];
+    calcRoot.querySelectorAll(".calc-seat").forEach((box) => {
+      const seat = SEATS[box.dataset.seat];
+      const card = document.querySelector(`.org-seat-open[data-seat="${box.dataset.seat}"]`);
+      if (card) {
+        card.setAttribute("aria-pressed", String(box.checked));
+        card.classList.toggle("is-added", box.checked);
+        card.querySelector(".org-seat-action").textContent = box.checked ? "Added" : "Add to my package";
+      }
+      if (!box.checked) return;
+      seatLabels.push(seat.label);
+      if (seat.setup) oneTime += seat.setup;
+      if (seat.monthly) monthly += seat.monthly;
+    });
+
     const emptyEl = document.getElementById("calc-empty");
     const linesEl = document.getElementById("calc-lines");
-    const hasSelection = n > 0;
+    const hasSelection = n > 0 || seatLabels.length > 0;
 
     emptyEl.hidden = hasSelection;
     linesEl.hidden = !hasSelection;
@@ -230,7 +263,7 @@ if (calcRoot) {
     }
 
     const ctaLink = document.getElementById("calc-cta");
-    if (n === 0) {
+    if (!hasSelection) {
       ctaLink.href = "/contact";
     } else {
       const investmentParts = [];
@@ -238,13 +271,15 @@ if (calcRoot) {
       if (monthly > 0) investmentParts.push(`${fmt(monthly)}/mo`);
       if (quarterly > 0) investmentParts.push(`${fmt(quarterly)}/quarter`);
 
-      let need = `From the Investment calculator, I'm interested in: ${summaryParts.join("; ")}. Estimated investment: ${investmentParts.join(" + ")}`;
+      const interestedIn = summaryParts.length ? summaryParts.join("; ") : "adding team seats";
+      let need = `From the Investment calculator, I'm interested in: ${interestedIn}. Estimated investment: ${investmentParts.join(" + ")}`;
       need += discountNoteText ? ` (${discountNoteText}).` : ".";
+      if (seatLabels.length) need += ` Team seats: ${seatLabels.join(", ")}.`;
       if (addonDescs.length) need += ` Add-ons: ${addonDescs.join(", ")}.`;
 
       const params = new URLSearchParams();
       params.set("need", need);
-      params.set("services", selectedLabels.join("|"));
+      if (selectedLabels.length) params.set("services", selectedLabels.join("|"));
       ctaLink.href = `/contact?${params.toString()}`;
     }
   }

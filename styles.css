@@ -19,11 +19,11 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
 }
 
-.heading { font-family: "Fraunces", "Space Grotesk", serif; font-weight: 300; letter-spacing: 0; }
+.heading { font-family: "Elsie", Georgia, serif; font-weight: 400; letter-spacing: 0; }
 
 a { color: var(--accent); transition: color 0.2s ease; }
 a:hover { color: var(--accent-hover); }
@@ -47,7 +47,7 @@ a:hover { color: var(--accent-hover); }
 
 .logo { display: flex; flex-direction: column; text-decoration: none; transition: opacity 0.2s ease; }
 .logo:hover { opacity: 0.7; }
-.logo-name { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 20px; color: var(--text); line-height: 1.2; }
+.logo-name { font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 20px; color: var(--text); line-height: 1.2; }
 .logo-tagline { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; margin-top: 2px; }
 
 .site-header nav { display: flex; gap: 32px; flex-wrap: wrap; }
@@ -171,7 +171,7 @@ a:hover { color: var(--accent-hover); }
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   font-weight: 700;
   font-size: 18px;
   color: var(--muted);
@@ -234,14 +234,14 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
 .card-icon svg { width: 22px; height: 22px; }
 
 .service-card .num {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   font-weight: 700;
   font-size: 14px;
   color: var(--accent);
   margin-bottom: 16px;
 }
 
-.service-card h3 { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.3rem; margin: 0 0 12px; }
+.service-card h3 { font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 1.3rem; margin: 0 0 12px; }
 
 .service-card p { color: var(--muted); margin: 0; }
 
@@ -274,14 +274,14 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
 .step-icon svg { width: 20px; height: 20px; }
 
 .process-step .num {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   font-weight: 700;
   font-size: 2.4rem;
   color: var(--accent);
   margin-bottom: 12px;
 }
 
-.process-step h3 { font-family: "Space Grotesk", sans-serif; font-size: 1.15rem; margin: 0 0 10px; }
+.process-step h3 { font-family: "Hanken Grotesk", sans-serif; font-size: 1.15rem; margin: 0 0 10px; }
 .process-step p { color: var(--muted); margin: 0; }
 
 /* CTA banner */
@@ -426,7 +426,7 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
   padding: 12px 14px;
   border: 1px solid var(--border);
   border-radius: 4px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   font-size: 15px;
   color: var(--text);
   background: var(--bg);
@@ -480,7 +480,7 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
   cursor: pointer;
@@ -523,7 +523,7 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
   margin-bottom: 24px;
 }
 
-.calc-addons h3 { font-family: "Space Grotesk", sans-serif; font-size: 1rem; margin: 0 0 16px; }
+.calc-addons h3 { font-family: "Hanken Grotesk", sans-serif; font-size: 1rem; margin: 0 0 16px; }
 
 .calc-addon-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
 .calc-addon-row label { font-size: 15px; }
@@ -552,7 +552,7 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
   border: none;
   font-size: 15px;
   font-weight: 600;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   color: var(--text);
   background: transparent;
 }
@@ -571,7 +571,7 @@ p.section-lede { font-size: 1.1rem; color: var(--muted); max-width: 640px; margi
 
 .calc-summary-line { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--border-dark); font-size: 15px; }
 .calc-summary-line:last-of-type { border-bottom: none; }
-.calc-summary-line strong { font-family: "Space Grotesk", sans-serif; font-size: 1.3rem; color: var(--accent); }
+.calc-summary-line strong { font-family: "Hanken Grotesk", sans-serif; font-size: 1.3rem; color: var(--accent); }
 
 .calc-discount-note { font-size: 13px; color: var(--muted-inverse); margin: 14px 0 0; }
 

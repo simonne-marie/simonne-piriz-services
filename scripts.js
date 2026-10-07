@@ -88,8 +88,8 @@ const calcRoot = document.getElementById("investment-calc");
 if (calcRoot) {
   const RATES = {
     website: { setup: { standard: 2900, premium: 5200 }, handoff: { standard: 3800, premium: 6800 }, monthly: 400, quarterly: 750 },
-    content: { setup: 450, monthly: 800, quarterly: 1500 },
-    social: { setup: 350, monthly: 750, quarterly: 1350 },
+    content: { setup: 450, monthly: 800, quarterly: 1500, handoff: 2800 },
+    social: { setup: 350, monthly: 750, quarterly: 1350, handoff: 2600 },
   };
 
   const SEATS = {
@@ -104,14 +104,49 @@ if (calcRoot) {
   const fmt = (n) => `$${Math.round(n).toLocaleString()}`;
 
   const qtyInput = document.getElementById("addon-posts");
+  const qtyOf = (id) => parseInt(document.getElementById(id).value, 10) || 0;
   calcRoot.querySelectorAll(".qty-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
+      const input = btn.closest(".qty-stepper").querySelector("input");
       const step = parseInt(btn.dataset.step, 10);
-      const next = Math.min(20, Math.max(0, parseInt(qtyInput.value, 10) + step));
-      qtyInput.value = next;
+      const max = parseInt(input.max, 10) || 20;
+      input.value = Math.min(max, Math.max(0, (parseInt(input.value, 10) || 0) + step));
       recalc();
     });
   });
+
+  const setService = (name, on) => {
+    const box = calcRoot.querySelector(`.calc-include[data-service="${name}"]`);
+    box.checked = on;
+    box.closest(".calc-service").querySelector(".calc-options").hidden = !on;
+  };
+
+  const resetAll = () => {
+    ["website", "content", "social"].forEach((s) => setService(s, false));
+    calcRoot.querySelectorAll('input[type="radio"]').forEach((r) => { r.checked = r.defaultChecked; });
+    calcRoot.querySelectorAll('.calc-addon[type="checkbox"], .calc-seat').forEach((b) => { b.checked = false; });
+    calcRoot.querySelectorAll(".qty-stepper input").forEach((i) => { i.value = 0; });
+  };
+
+  const fullTeamBtn = document.getElementById("preset-full");
+  if (fullTeamBtn) {
+    fullTeamBtn.addEventListener("click", () => {
+      resetAll();
+      ["website", "content", "social"].forEach((s) => setService(s, true));
+      calcRoot.querySelector('.calc-seat[data-seat="crm"]').checked = true;
+      calcRoot.querySelector('.calc-seat[data-seat="reporting"]').checked = true;
+      calcRoot.querySelector('[data-addon="newsletter"]').checked = true;
+      recalc();
+    });
+  }
+
+  const clearBtn = document.getElementById("preset-clear");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      resetAll();
+      recalc();
+    });
+  }
 
   calcRoot.querySelectorAll(".calc-include").forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
@@ -175,21 +210,29 @@ if (calcRoot) {
     if (included.content) {
       n++;
       selectedLabels.push(SERVICE_LABEL.content);
-      setupSum += RATES.content.setup;
       const path = calcRoot.querySelector('input[name="content-path"]:checked').value;
       summaryParts.push(`${SERVICE_LABEL.content} (${PATH_LABEL[path]})`);
-      if (path === "monthly") monthlySum += RATES.content.monthly;
-      if (path === "quarterly") quarterlySum += RATES.content.quarterly;
+      if (path === "handoff") {
+        handoffSum += RATES.content.handoff;
+      } else {
+        setupSum += RATES.content.setup;
+        if (path === "monthly") monthlySum += RATES.content.monthly;
+        if (path === "quarterly") quarterlySum += RATES.content.quarterly;
+      }
     }
 
     if (included.social) {
       n++;
       selectedLabels.push(SERVICE_LABEL.social);
-      setupSum += RATES.social.setup;
       const path = calcRoot.querySelector('input[name="social-path"]:checked').value;
       summaryParts.push(`${SERVICE_LABEL.social} (${PATH_LABEL[path]})`);
-      if (path === "monthly") monthlySum += RATES.social.monthly;
-      if (path === "quarterly") quarterlySum += RATES.social.quarterly;
+      if (path === "handoff") {
+        handoffSum += RATES.social.handoff;
+      } else {
+        setupSum += RATES.social.setup;
+        if (path === "monthly") monthlySum += RATES.social.monthly;
+        if (path === "quarterly") quarterlySum += RATES.social.quarterly;
+      }
     }
 
     const oneTimeDiscount = n >= 2 ? 0.1 : 0;
@@ -219,7 +262,25 @@ if (calcRoot) {
     }
     if (calcRoot.querySelector('[data-addon="brandVoiceDoc"]').checked) {
       oneTime += 300;
-      addonDescs.push("a brand voice / copy deep-dive document");
+      addonDescs.push("a voice and tone guide");
+    }
+    if (calcRoot.querySelector('[data-addon="brandFoundation"]').checked) {
+      oneTime += 2400;
+      addonDescs.push("Brand Foundation");
+    }
+    if (calcRoot.querySelector('[data-addon="newSocialPages"]').checked) {
+      oneTime += 300;
+      addonDescs.push("new social page setup");
+    }
+    const extraPages = qtyOf("addon-pages");
+    if (extraPages > 0) {
+      oneTime += extraPages * 250;
+      addonDescs.push(`${extraPages} extra website page${extraPages > 1 ? "s" : ""}`);
+    }
+    const updatePacks = qtyOf("addon-packs");
+    if (updatePacks > 0) {
+      oneTime += updatePacks * 225;
+      addonDescs.push(`${updatePacks} Update Pack${updatePacks > 1 ? "s" : ""} (3 small site changes each)`);
     }
 
     const seatLabels = [];
@@ -239,7 +300,7 @@ if (calcRoot) {
 
     const emptyEl = document.getElementById("calc-empty");
     const linesEl = document.getElementById("calc-lines");
-    const hasSelection = n > 0 || seatLabels.length > 0;
+    const hasSelection = oneTime > 0 || monthly > 0 || quarterly > 0;
 
     emptyEl.hidden = hasSelection;
     linesEl.hidden = !hasSelection;
@@ -271,7 +332,7 @@ if (calcRoot) {
       if (monthly > 0) investmentParts.push(`${fmt(monthly)}/mo`);
       if (quarterly > 0) investmentParts.push(`${fmt(quarterly)}/quarter`);
 
-      const interestedIn = summaryParts.length ? summaryParts.join("; ") : "adding team seats";
+      const interestedIn = summaryParts.length ? summaryParts.join("; ") : "a custom package";
       let need = `From the Investment calculator, I'm interested in: ${interestedIn}. Estimated investment: ${investmentParts.join(" + ")}`;
       need += discountNoteText ? ` (${discountNoteText}).` : ".";
       if (seatLabels.length) need += ` Team seats: ${seatLabels.join(", ")}.`;

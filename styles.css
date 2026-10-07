@@ -787,3 +787,69 @@ button.org-seat-open {
 .org-open-note { margin: 22px 0 0; text-align: center; color: var(--muted-inverse); font-size: 0.95rem; }
 
 .calc-seat-hint { margin: -6px 0 16px; font-size: 13px; color: var(--muted); }
+
+/* Connected-stack additions */
+.two-ways,
+.found-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 800px) {
+  .two-ways,
+  .found-grid { grid-template-columns: 1fr; }
+}
+
+.way-tag {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.block-gap { margin-top: 72px; }
+
+.split-line {
+  font-size: 0.95rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin: 18px 0 0;
+  line-height: 1.7;
+}
+
+.split-line strong { color: var(--text); }
+
+.found-link { margin-top: 28px; }
+
+.calc-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.calc-presets-label { font-size: 13px; font-weight: 600; color: var(--muted); margin-right: 4px; }
+
+.pill-btn { background: var(--bg); font-family: inherit; color: var(--text); }
+.pill-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.calc-note { font-size: 14px; color: var(--muted); margin: 0 0 22px; max-width: 640px; }
+
+.about-photo {
+  float: right;
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 4px 0 20px 32px;
+}
+
+@media (max-width: 640px) {
+  .about-photo { float: none; display: block; width: 100%; max-width: 280px; height: auto; aspect-ratio: 1 / 1; margin: 0 0 24px; }
+}

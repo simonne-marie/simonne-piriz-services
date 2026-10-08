@@ -92,6 +92,8 @@ if (calcRoot) {
     social: { setup: 350, monthly: 750, quarterly: 1350, handoff: 2600 },
   };
 
+  const FULL_TEAM_PRICE = 2500;
+
   const SEATS = {
     crm: { label: "CRM & Automation Specialist", setup: 750, monthly: 350 },
     designer: { label: "Visual Designer", monthly: 300 },
@@ -298,6 +300,17 @@ if (calcRoot) {
       if (seat.monthly) monthly += seat.monthly;
     });
 
+    const seatOn = (key) => calcRoot.querySelector(`.calc-seat[data-seat="${key}"]`).checked;
+    const monthlyPath = (svc) =>
+      included[svc] && calcRoot.querySelector(`input[name="${svc}-path"]:checked`).value === "monthly";
+    const isFullTeam =
+      monthlyPath("website") && monthlyPath("content") && monthlyPath("social") &&
+      seatOn("crm") && seatOn("reporting") && calcRoot.querySelector('[data-addon="newsletter"]').checked;
+    if (isFullTeam) {
+      const covered = monthlySum * (1 - recurringDiscount) + SEATS.crm.monthly + SEATS.reporting.monthly + 300;
+      monthly = monthly - covered + FULL_TEAM_PRICE;
+    }
+
     const emptyEl = document.getElementById("calc-empty");
     const linesEl = document.getElementById("calc-lines");
     const hasSelection = oneTime > 0 || monthly > 0 || quarterly > 0;
@@ -315,7 +328,11 @@ if (calcRoot) {
 
     const noteEl = document.getElementById("calc-discount-note");
     let discountNoteText = "";
-    if (n >= 2) {
+    if (isFullTeam) {
+      discountNoteText = "the Full Marketing Team at one flat monthly price";
+      noteEl.hidden = false;
+      noteEl.textContent = "Full Marketing Team: every seat filled at one flat monthly price.";
+    } else if (n >= 2) {
       discountNoteText = `includes a ${Math.round(recurringDiscount * 100)}% bundle discount for combining ${n} services`;
       noteEl.hidden = false;
       noteEl.textContent = `Includes a ${Math.round(recurringDiscount * 100)}% bundle discount for combining ${n} services.`;

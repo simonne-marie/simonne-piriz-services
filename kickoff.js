@@ -3,9 +3,9 @@
   const root = document.getElementById("kick-form");
   if (!root) return;
 
-  // HubSpot form "Kickoff Brief". Paste its form ID here once it exists in HubSpot.
+  // HubSpot form "Kickoff Brief" (all fields are contact properties).
   const HUBSPOT_PORTAL_ID = "247415032";
-  const HUBSPOT_FORM_GUID = "";
+  const HUBSPOT_FORM_GUID = "a3e9a2de-1ff1-4b99-aefc-8aa841bc9caa";
   const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
   const DRAFT_KEY = "sp-kickoff-draft-v1";
 
@@ -439,7 +439,7 @@
     const hutk = (document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/) || [])[1];
     const fields = [
       ["0-1/email", a.email], ["0-1/firstname", a.firstname], ["0-1/lastname", a.lastname], ["0-1/phone", a.phone],
-      ["0-2/name", a.biz_name], ["0-2/website", a.website],
+      ["0-1/company", a.biz_name], ["0-1/website", a.website],
       ["0-1/kickoff_services", (a.path_services || []).join(";")],
       ["0-1/kickoff_brand_status", a.path_brand],
       ["0-1/kickoff_budget", [a.inv_once, a.inv_monthly && "monthly: " + a.inv_monthly].filter(Boolean).join(", ")],

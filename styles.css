@@ -596,6 +596,7 @@ p.statement-small { font-size: 1.1rem; margin: 20px 0 0; }
 
 .calc-summary-line { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--border-dark); font-size: 15px; }
 .calc-summary-line:last-of-type { border-bottom: none; }
+.calc-summary-line[hidden] { display: none; }
 .calc-summary-line strong { font-family: "Bricolage Grotesque", sans-serif; font-size: 1.3rem; color: var(--accent); }
 
 .calc-discount-note { font-size: 13px; color: var(--muted-inverse); margin: 14px 0 0; }
@@ -853,6 +854,13 @@ button.org-seat-open {
 @media (max-width: 640px) {
   .about-photo { float: none; display: block; width: 100%; max-width: 280px; height: auto; aspect-ratio: 1 / 1; margin: 0 0 24px; }
 }
+
+/* Kickoff Brief links */
+
+.calc-kickoff { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+.calc-kickoff a { font-weight: 600; }
+.kickoff-note { font-size: 14px; color: var(--muted); margin: -16px 0 28px; }
+.kickoff-note a { font-weight: 600; }
 
 /* Kickoff Brief (kickoff.html) */
 

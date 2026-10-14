@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kickoff Chat — Simonne Piriz Studio</title>
+<!-- Not linked yet: being tested before launch. Kept out of search results either way. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Talk through your project with the studio's AI assistant, and get a Kickoff Brief to send.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@600&family=Syne:wght@800&family=Nunito:wght@400;800&family=JetBrains+Mono:wght@500&family=Manrope:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Libre+Baskerville:wght@700&family=Source+Sans+3:wght@400&family=DM+Serif+Display&family=DM+Sans:wght@400&family=Sora:wght@700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/247415032.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/"><img src="/assets/logo.png" alt="Simonne Piriz Studio, home" width="44" height="44"></a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding: 48px 0 32px;">
+  <div class="wrap">
+    <div class="eyebrow">Kickoff Brief</div>
+    <h1 class="heading" style="font-size: 2.3rem;">Let’s talk through your project.</h1>
+    <p class="lede">Answer in your own words and I’ll ask what I need to plan your brand, website and marketing. At the end you’ll review your Kickoff Brief before anything is sent.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap chat-wrap">
+    <div id="chat-app">
+      <div class="chat-top">
+        <p class="chat-note">You’re chatting with the studio’s AI assistant. Simonne reads every brief. Please don’t share passwords. <a href="/kickoff">Prefer a form?</a> Your answers come with you.</p>
+        <button type="button" class="k-link" id="chat-restart">Start over</button>
+      </div>
+      <div class="confirm-bar" id="chat-restart-confirm" hidden>
+        <span>Clear this conversation and every answer?</span>
+        <button type="button" class="btn" id="chat-restart-yes">Clear and start over</button>
+        <button type="button" class="k-link" id="chat-restart-no">Keep going</button>
+      </div>
+
+      <div class="chat-panel">
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
+        <div class="chat-typing" id="chat-typing" hidden><span></span><span></span><span></span><em>Writing</em></div>
+        <form class="chat-composer" id="chat-form">
+          <label for="chat-input" class="visually-hidden">Your message</label>
+          <textarea id="chat-input" rows="2" placeholder="Type your answer" autocomplete="off"></textarea>
+          <button type="submit" class="btn" id="chat-send">Send</button>
+        </form>
+      </div>
+      <div class="form-status" id="chat-status" role="status"></div>
+
+      <div class="chat-review" id="chat-review" hidden>
+        <h2 class="heading">Your Kickoff Brief</h2>
+        <p class="chat-review-intro">This is what Simonne will receive. Keep chatting to change anything.</p>
+        <div class="k-missing" id="chat-missing"></div>
+        <pre class="chat-brief" id="chat-brief" tabindex="0"></pre>
+        <input type="text" id="chat-hp" class="kick-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="checkbox-row k-consent"><input type="checkbox" id="chat-consent"> I agree that Simonne Piriz Studio can store these answers to plan my project, as described in the <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</label>
+        <div class="kick-nav">
+          <button type="button" class="kick-back" id="chat-keep">Keep chatting</button>
+          <button type="button" class="btn" id="chat-submit">Send my Kickoff Brief</button>
+        </div>
+        <div class="form-status" id="chat-review-status" role="status"></div>
+      </div>
+    </div>
+
+    <div class="kick-done" id="kick-done" hidden>
+      <h2 class="heading">Thank you. Your Kickoff Brief is in.</h2>
+      <p>I’ll read through everything and reach out within two business days with next steps. If you think of something you forgot, just reply to my email.</p>
+      <a class="btn" href="/">Back to the site</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>&copy; 2026 Simonne Piriz Studio.</p>
+  <p class="footer-links"><a href="https://www.linkedin.com/company/simonne-piriz-studio/" target="_blank" rel="noopener">LinkedIn</a><span class="sep">&middot;</span><a href="/privacy">Privacy Policy</a><span class="sep">&middot;</span><a href="/terms">Terms of Use</a></p>
+</footer>
+<script src="scripts.js"></script>
+<script type="module" src="kickoff-chat.js"></script>
+</body>
+</html>

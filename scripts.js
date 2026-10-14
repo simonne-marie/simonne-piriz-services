@@ -340,6 +340,31 @@ if (calcRoot) {
       noteEl.hidden = true;
     }
 
+    const kickoffLink = document.getElementById("calc-kickoff");
+    if (kickoffLink) {
+      const SERVICE_KICKOFF = { website: "Website", content: "Content & Blog", social: "Social Media" };
+      const PATH_KICKOFF = { monthly: "Monthly Retainer", quarterly: "Quarterly Sprint", handoff: "Build & Handoff" };
+      const SEAT_KICKOFF = { crm: "CRM & Automation", designer: "Visual Designer", intel: "Competitive Intelligence", reporting: "Reporting", retention: "Customer Retention", docs: "Training & Docs" };
+      const kServices = Object.keys(SERVICE_KICKOFF).filter((svc) => included[svc]).map((svc) => SERVICE_KICKOFF[svc]);
+      if (calcRoot.querySelector('[data-addon="brandFoundation"]').checked) kServices.push("Brand Foundation");
+      if (calcRoot.querySelector('[data-addon="newSocialPages"]').checked) kServices.push("New social pages");
+      if (updatePacks > 0) kServices.push("Update Pack");
+      if (isFullTeam) kServices.push("Full Marketing Team");
+      const kSeats = Object.keys(SEAT_KICKOFF).filter(seatOn).map((key) => SEAT_KICKOFF[key]);
+      const firstSvc = ["website", "content", "social"].find((svc) => included[svc]);
+
+      const kParams = new URLSearchParams();
+      if (kServices.length) kParams.set("services", kServices.join("|"));
+      if (kSeats.length) kParams.set("seats", kSeats.join("|"));
+      if (included.website) {
+        const tier = calcRoot.querySelector('input[name="website-tier"]:checked').value;
+        kParams.set("tier", tier === "premium" ? "Premium (custom animation)" : "Standard (up to 5 pages)");
+      }
+      if (firstSvc) kParams.set("manage", PATH_KICKOFF[calcRoot.querySelector(`input[name="${firstSvc}-path"]:checked`).value]);
+      const query = kParams.toString();
+      kickoffLink.href = query ? `/kickoff?${query}` : "/kickoff";
+    }
+
     const ctaLink = document.getElementById("calc-cta");
     if (!hasSelection) {
       ctaLink.href = "/contact";

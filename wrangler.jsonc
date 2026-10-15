@@ -1,8 +1,21 @@
 {
   "name": "simonne-piriz-services",
   "compatibility_date": "2026-10-06",
+  // Static pages are served from assets first; the script only handles /api/kickoff-chat.
+  "main": "worker/index.js",
   "assets": {
-    "directory": "./"
+    "directory": "./",
+    "binding": "ASSETS"
   },
+  // Up to 20 chat turns per minute from one visitor. The Anthropic API key is a secret
+  // (ANTHROPIC_API_KEY) set in the Cloudflare dashboard, never in this file.
+  "ratelimits": [
+    {
+      "name": "CHAT_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 20, "period": 60 }
+    }
+  ],
+  "observability": { "enabled": true },
   "previews": {}
 }

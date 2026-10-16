@@ -395,7 +395,7 @@
     };
     L.push(`# Kickoff Brief: ${bizName()}`);
     L.push(`Submitted by the client on ${new Date().toISOString().slice(0, 10)}.`);
-    L.push("", "Build from this brief. Use the client’s own words where quoted. Do not invent reviews, numbers, credentials or results; leave a clearly marked placeholder instead. Build in the client’s own accounts. No logo design. Ask before guessing on anything under Open items.");
+    L.push("", "Build from this brief. Use the client’s own words where quoted. Do not invent reviews, numbers, credentials or results; leave a clearly marked placeholder instead. Build in the client’s own accounts. No logo design. Ask before guessing on anything under Open items. Before building, note where answers pull against each other (for example, a playful voice with formal fonts) and list them as questions to settle with the client.");
     if (P.buildBrand()) L.push("Brand: choose the final heading and body fonts and a 5-role color system (background, soft, secondary, accent, ink) from the loved options below, check contrast for accessibility, and show 2 directions before building pages.");
     visibleSteps().filter((s) => s.id !== "send").forEach((s) => {
       const start = L.length;

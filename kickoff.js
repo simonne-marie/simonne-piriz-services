@@ -132,7 +132,7 @@
     { id: "business", title: "Your business", intro: "The plain-language story. Much of your homepage will come from these answers.", qs: [
       { id: "biz_legal", t: "text", b: "Legal entity name", label: "Legal business name, if it’s different", help: "Used in your site footer, privacy and terms pages.", placeholder: "Your Business LLC", optional: 1 },
       { id: "biz_oneliner", t: "area", need: 1, b: "In one sentence", label: "If you had ten seconds to explain what you do to a stranger, what would you say?" },
-      { id: "biz_offer", t: "area", need: 1, b: "Offer (most revenue first)", label: "What do you offer? Start with what brings in the most money.", help: "Tell me which ones you want more of." },
+      { id: "biz_offer", t: "area", need: 1, b: "Offer (most revenue first)", label: "What do you sell? List your main products or services.", help: "Put your best-sellers first, and star the ones you want to sell more of.", placeholder: "Candle gift sets*, custom orders*, candle-making workshops" },
       { id: "biz_area", t: "text", b: "Service area", label: "Where are your customers?", placeholder: "A city, a region, or anywhere online" },
       { id: "biz_diff", t: "area", need: 1, b: "Why customers choose them", label: "When someone picks you over the alternatives, what’s the reason?", help: "Years in business, certifications, guarantees and real numbers all help. I only use what you give me." },
       { id: "biz_competitors", t: "area", b: "Competitors", label: "Who else do your customers look at? Is there a competitor whose website you like?" },

@@ -1,0 +1,56 @@
+name: Claude review
+# Claude reviews each site PR once, when it opens (or when a draft is marked ready),
+# and posts the review as a PR comment. Vinny relays that comment into the PR's
+# Slack thread like any other comment.
+#
+# Needs one repository secret: CLAUDE_CODE_OAUTH_TOKEN (from `claude setup-token`)
+# or ANTHROPIC_API_KEY. Without either, the review is skipped instead of failing.
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+permissions:
+  contents: read
+  pull-requests: write
+  issues: read
+  id-token: write
+jobs:
+  review:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    env:
+      HAS_KEY: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' || secrets.ANTHROPIC_API_KEY != '' }}
+    steps:
+      - if: env.HAS_KEY != 'true'
+        run: echo "[claude] CLAUDE_CODE_OAUTH_TOKEN and ANTHROPIC_API_KEY are unset; skipping the review"
+      - if: env.HAS_KEY == 'true'
+        uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - if: env.HAS_KEY == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Review this pull request for Simonne Piriz Studio's website: static HTML, CSS and
+            JavaScript pages served by Cloudflare, plus a small Cloudflare Worker in worker/.
+            Merging to main puts the change live, so look for anything that would break or
+            embarrass the live site:
+            - Bugs in the JavaScript or the Worker, and broken links, images or form wiring
+            - Pages that would look wrong on a phone, or accessibility problems (alt text,
+              labels, contrast, keyboard use)
+            - New pages missing what every page has: the Google Tag Manager and Google
+              Analytics tags, the HubSpot script, the favicon and social-preview tags; and
+              whether sitemap.xml should list them
+            - New third-party services or new personal data collected without a matching
+              update to privacy.html
+            - Secrets or API keys committed to the repo
+
+            Simonne isn't a developer, so write in plain language: say what would go wrong
+            for a visitor and how to fix it. List the issues that matter first, keep nits
+            short, and say plainly if you found nothing worth changing.
+
+            Post the review as one comment with `gh pr comment`.
+          claude_args: '--allowed-tools "Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"'

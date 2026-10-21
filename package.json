@@ -1,0 +1,9 @@
+{
+  "name": "simonne-piriz-services",
+  "private": true,
+  "type": "module",
+  "description": "Simonne Piriz Studio site. Static pages plus a small Cloudflare Worker for the Kickoff chat.",
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.131.0"
+  }
+}

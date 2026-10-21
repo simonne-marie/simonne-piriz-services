@@ -6,3 +6,7 @@ linkedin
 node_modules
 wrangler.jsonc
 .assetsignore
+worker
+package.json
+package-lock.json
+.gitignore

@@ -53,6 +53,25 @@ if (inquiryForm) {
       fields.push({ name: SERVICES_FIELD_NAME, value: selectedServices.join(";") });
     }
 
+    // Read for the Slack lead brief before the form is reset.
+    const value = (id) => document.getElementById(id).value.trim();
+    const lead = {
+      firstname: value("firstname"), lastname: value("lastname"), email: value("email"),
+      company: value("company"), website: value("website"), need: value("need"),
+      services: selectedServices, company_size: value("company_size"), timeline: value("timeline"),
+      industry: value("industry"), source: value("source"),
+      from_calculator: Boolean(prefillNeed || prefillServices),
+    };
+    // Posts the lead brief to Slack via worker.js. Fire-and-forget: it never blocks or fails the form.
+    const sendLeadBrief = (hubspotOk) => {
+      fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...lead, hubspot_ok: hubspotOk }),
+        keepalive: true,
+      }).catch(() => {});
+    };
+
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
 
@@ -71,10 +90,12 @@ if (inquiryForm) {
 
       if (!response.ok) throw new Error("Submission failed");
 
+      sendLeadBrief(true);
       inquiryForm.reset();
       statusEl.className = "form-status is-success";
       statusEl.textContent = "Thanks — that's sent. I'll be in touch soon.";
     } catch (err) {
+      if (lead.email) sendLeadBrief(false);
       statusEl.className = "form-status is-error";
       statusEl.textContent = "Something went wrong sending that. Try again, or email simonnemv@gmail.com directly.";
     } finally {

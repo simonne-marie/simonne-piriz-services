@@ -6,3 +6,4 @@ linkedin
 node_modules
 wrangler.jsonc
 .assetsignore
+worker.js

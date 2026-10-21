@@ -609,7 +609,7 @@ footer {
   text-align: center;
 }
 
-.logo img { display: block; width: 44px; height: 44px; border-radius: var(--radius-md, 6px); }
+.logo img { display: block; width: 44px; height: 44px; border-radius: 10px; }
 
 /* Org chart (services) */
 .org-section { background: var(--bg-dark); color: var(--text-inverse); }

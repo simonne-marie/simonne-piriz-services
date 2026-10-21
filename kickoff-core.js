@@ -118,7 +118,7 @@ export function createKickoff(a) {
     { id: "business", title: "Your business", intro: "The plain-language story. Much of your homepage will come from these answers.", qs: [
       { id: "biz_legal", t: "text", b: "Legal entity name", label: "Legal business name, if it’s different", help: "Used in your site footer, privacy and terms pages.", placeholder: "Your Business LLC", optional: 1 },
       { id: "biz_oneliner", t: "area", need: 1, b: "In one sentence", label: "If you had ten seconds to explain what you do to a stranger, what would you say?" },
-      { id: "biz_offer", t: "area", need: 1, b: "Offer (most revenue first)", label: "What do you offer? Start with what brings in the most money.", help: "Tell me which ones you want more of." },
+      { id: "biz_offer", t: "area", need: 1, b: "Offer (most revenue first)", label: "What do you sell? List your main products or services.", help: "Put your best-sellers first, and star the ones you want to sell more of.", placeholder: "Candle gift sets*, custom orders*, candle-making workshops" },
       { id: "biz_area", t: "text", b: "Service area", label: "Where are your customers?", placeholder: "A city, a region, or anywhere online" },
       { id: "biz_diff", t: "area", need: 1, b: "Why customers choose them", label: "When someone picks you over the alternatives, what’s the reason?", help: "Years in business, certifications, guarantees and real numbers all help. I only use what you give me." },
       { id: "biz_competitors", t: "area", b: "Competitors", label: "Who else do your customers look at? Is there a competitor whose website you like?" },
@@ -324,7 +324,7 @@ export function createKickoff(a) {
     };
     L.push(`# Kickoff Brief: ${bizName()}`);
     L.push(`Submitted by the client ${via === "chat" ? "through the Kickoff chat" : "through the Kickoff Brief form"} on ${new Date().toISOString().slice(0, 10)}.`);
-    L.push("", "Build from this brief. Use the client’s own words where quoted. Do not invent reviews, numbers, credentials or results; leave a clearly marked placeholder instead. Build in the client’s own accounts. No logo design. Ask before guessing on anything under Open items.");
+    L.push("", "Build from this brief. Use the client’s own words where quoted. Do not invent reviews, numbers, credentials or results; leave a clearly marked placeholder instead. Build in the client’s own accounts. No logo design. Ask before guessing on anything under Open items. Before building, note where answers pull against each other (for example, a playful voice with formal fonts) and list them as questions to settle with the client.");
     if (P.buildBrand()) L.push("Brand: choose the final heading and body fonts and a 5-role color system (background, soft, secondary, accent, ink) from the loved options below, check contrast for accessibility, and show 2 directions before building pages.");
     visibleSteps().filter((s) => s.id !== "send").forEach((s) => {
       const start = L.length;

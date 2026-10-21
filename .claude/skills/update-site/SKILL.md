@@ -1,6 +1,6 @@
 ---
 name: update-site
-description: Publish a change to Simonne's live portfolio site (simonnemarie.com) through a pull request, narrating each step in plain terms - branch, commit, push, pull request, review, merge, live. Use whenever Simonne asks to update, publish, ship, or push a change to the website, or asks "how do I get this live."
+description: Publish a change to Simonne's live Studio site (simonnepirizstud.io) through a pull request, narrating each step in plain terms - branch, commit, push, pull request, review, merge, live. Use whenever Simonne asks to update, publish, ship, or push a change to the website, or asks "how do I get this live."
 ---
 
 # Updating the live site
@@ -62,7 +62,7 @@ Stop here and let Simonne review: she can open the card in Slack, click
 Say: "**Live** - Cloudflare usually picks this up within a minute or two."
 After the merge, switch back with `git checkout main && git pull`, wait
 briefly, then check the deployed page (curl or the Browser tool) against the
-live URL(s) - the workers.dev URL and, once connected, simonnemarie.com - to
+live URL(s) - simonnepirizstud.io (not simonnemarie.com, which is her separate portfolio site) - to
 confirm the change actually shows up before telling Simonne it's done.
 
 ## Reminder for Simonne

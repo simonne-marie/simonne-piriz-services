@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Claude Code Moves</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --bg-dark: #191919;
+    --panel: #212121;
+    --border-dark: #333333;
+    --text-inverse: #ffffff;
+    --muted-inverse: #b8b8b8;
+    --accent: oklch(68% 0.19 40);
+    --card-icon-bg: #fbeee7;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1080px; height: 1350px; }
+  body {
+    background: var(--bg-dark);
+    color: var(--text-inverse);
+    font-family: "Instrument Sans", sans-serif;
+    overflow: hidden;
+  }
+  .canvas {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    padding: 64px 72px 56px;
+    display: flex;
+    flex-direction: column;
+    background-image:
+      radial-gradient(circle at 92% 6%, color-mix(in oklch, var(--accent) 28%, transparent) 0, transparent 34%),
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: auto, 54px 54px, 54px 54px;
+  }
+
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand img { width: 56px; height: 56px; border-radius: 10px; }
+  .brand span { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 22px; }
+  .eyebrow {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 17px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+    border: 1.5px solid var(--accent); border-radius: 999px; padding: 9px 18px;
+  }
+
+  h1 {
+    margin-top: 44px;
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800;
+    font-size: 80px; line-height: 1.02; letter-spacing: -0.02em;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lede { margin-top: 18px; font-size: 25px; line-height: 1.4; color: var(--muted-inverse); max-width: 860px; }
+
+  .term {
+    flex-shrink: 0;
+    margin-top: 34px;
+    background: var(--panel);
+    border: 1px solid var(--border-dark);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+  }
+  .term-bar {
+    display: flex; align-items: center; gap: 9px;
+    padding: 16px 22px; border-bottom: 1px solid var(--border-dark);
+    font-family: "JetBrains Mono", monospace; font-size: 16px; color: #8a8a8a;
+  }
+  .dot { width: 13px; height: 13px; border-radius: 50%; background: #3d3d3d; }
+  .dot:first-child { background: var(--accent); }
+  .term-bar .path { margin-left: 14px; }
+  .rows { padding: 8px 30px; }
+  .row {
+    display: grid; grid-template-columns: 52px 1fr; column-gap: 8px;
+    padding: 15px 0; border-bottom: 1px dashed #343434;
+  }
+  .row:last-child { border-bottom: 0; }
+  .num { font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--accent); padding-top: 4px; }
+  .cmd { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 29px; color: var(--text-inverse); }
+  .cmd .p { color: var(--accent); }
+  .desc { grid-column: 2; margin-top: 4px; font-size: 21px; color: var(--muted-inverse); line-height: 1.35; }
+
+  .proof {
+    flex-shrink: 0;
+    margin-top: 28px;
+    display: grid; grid-template-columns: auto 1fr 1fr 1fr; align-items: center; gap: 0;
+    background: var(--card-icon-bg); color: var(--bg-dark);
+    border-radius: 20px; padding: 26px 30px;
+  }
+  .proof-label {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 16px;
+    letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.3; padding-right: 26px;
+    border-right: 1.5px solid rgba(25,25,25,0.15);
+  }
+  .stat { padding-left: 26px; }
+  .stat b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 50px; line-height: 1; color: oklch(55% 0.19 40); letter-spacing: -0.02em; }
+  .stat span { display: block; margin-top: 6px; font-size: 18px; line-height: 1.3; color: #3a3a3a; }
+
+  .foot {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 21px; color: var(--muted-inverse);
+  }
+  .foot strong { color: var(--text-inverse); font-weight: 600; }
+  .foot .url { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; color: var(--text-inverse); }
+  .foot .url i { font-style: normal; color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="top">
+    <div class="brand">
+      <img src="../../../assets/logo.png" alt="">
+      <span>Simonne Piriz Studio</span>
+    </div>
+    <div class="eyebrow">Field notes</div>
+  </div>
+
+  <h1>5 Claude Code moves<br>I'd teach you <em>first.</em></h1>
+  <p class="lede">The exact setup I used to build and run my studio site. No developer background required.</p>
+
+  <div class="term">
+    <div class="term-bar">
+      <i class="dot"></i><i class="dot"></i><i class="dot"></i>
+      <span class="path">~/simonne-piriz-studio</span>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="num">01</div>
+        <div class="cmd"><span class="p">/</span>init</div>
+        <div class="desc">Writes a CLAUDE.md so it learns your project once, not every session.</div>
+      </div>
+      <div class="row">
+        <div class="num">02</div>
+        <div class="cmd">.claude<span class="p">/</span>skills<span class="p">/</span></div>
+        <div class="desc">Teach it your workflow in plain English. Mine ships every site update.</div>
+      </div>
+      <div class="row">
+        <div class="num">03</div>
+        <div class="cmd">Shift <span class="p">+</span> Tab</div>
+        <div class="desc">Plan mode. It proposes the change, you approve, then it builds.</div>
+      </div>
+      <div class="row">
+        <div class="num">04</div>
+        <div class="cmd"><span class="p">/</span>code-review</div>
+        <div class="desc">A second set of eyes on the change before anything goes live.</div>
+      </div>
+      <div class="row">
+        <div class="num">05</div>
+        <div class="cmd"><span class="p">/</span>fewer-permission-prompts</div>
+        <div class="desc">Pre-approves the safe, read-only stuff so you stop clicking "yes."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof">
+    <div class="proof-label">Built<br>with these</div>
+    <div class="stat"><b>19</b><span>updates shipped live</span></div>
+    <div class="stat"><b>5 wks</b><span>first commit to today</span></div>
+    <div class="stat"><b>1</b><span>Slack review bot, Vinny</span></div>
+  </div>
+
+  <div class="foot">
+    <span><strong>Save this.</strong> Stuck on one? Ask in the comments.</span>
+    <span class="url">simonnepirizstud<i>.</i>io</span>
+  </div>
+</div>
+</body>
+</html>

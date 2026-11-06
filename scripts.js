@@ -86,22 +86,7 @@ if (inquiryForm) {
 
 const calcRoot = document.getElementById("investment-calc");
 if (calcRoot) {
-  const RATES = {
-    website: { setup: { standard: 2900, premium: 5200 }, handoff: { standard: 3800, premium: 6800 }, monthly: 400, quarterly: 750 },
-    content: { setup: 450, monthly: 800, quarterly: 1500, handoff: 2800 },
-    social: { setup: 350, monthly: 750, quarterly: 1350, handoff: 2600 },
-  };
-
-  const FULL_TEAM_PRICE = 2500;
-
-  const SEATS = {
-    crm: { label: "CRM & Automation Specialist", setup: 750, monthly: 350 },
-    designer: { label: "Visual Designer", monthly: 300 },
-    intel: { label: "Competitive Intelligence Analyst", monthly: 250 },
-    reporting: { label: "Reporting Analyst", monthly: 200 },
-    retention: { label: "Customer Retention Analyst", monthly: 300 },
-    docs: { label: "Training & Docs Builder", setup: 500 },
-  };
+  const { RATES, FULL_TEAM_PRICE, SEATS, EXTRAS, BUNDLE } = window.SP_PRICING;
 
   const fmt = (n) => `$${Math.round(n).toLocaleString()}`;
 
@@ -237,8 +222,8 @@ if (calcRoot) {
       }
     }
 
-    const oneTimeDiscount = n >= 2 ? 0.1 : 0;
-    const recurringDiscount = n >= 3 ? 0.15 : n === 2 ? 0.1 : 0;
+    const oneTimeDiscount = n >= 2 ? BUNDLE.setup : 0;
+    const recurringDiscount = n >= 3 ? BUNDLE.three : n === 2 ? BUNDLE.two : 0;
 
     let oneTime = (setupSum + handoffSum) * (1 - oneTimeDiscount);
     let monthly = monthlySum * (1 - recurringDiscount);
@@ -247,41 +232,41 @@ if (calcRoot) {
     const addonDescs = [];
     const extraPosts = parseInt(qtyInput.value, 10) || 0;
     if (extraPosts > 0) {
-      monthly += extraPosts * 175;
+      monthly += extraPosts * EXTRAS.extraPost;
       addonDescs.push(`${extraPosts} extra blog post${extraPosts > 1 ? "s" : ""}/month`);
     }
     if (calcRoot.querySelector('[data-addon="extraPlatform"]').checked) {
-      monthly += 200;
+      monthly += EXTRAS.extraPlatform;
       addonDescs.push("an additional social platform");
     }
     if (calcRoot.querySelector('[data-addon="newsletter"]').checked) {
-      monthly += 300;
+      monthly += EXTRAS.newsletter;
       addonDescs.push("email newsletter management");
     }
     if (calcRoot.querySelector('[data-addon="rushSetup"]').checked) {
-      oneTime += oneTime * 0.2;
+      oneTime += oneTime * EXTRAS.rush;
       addonDescs.push("rush setup");
     }
     if (calcRoot.querySelector('[data-addon="brandVoiceDoc"]').checked) {
-      oneTime += 300;
+      oneTime += EXTRAS.voiceGuide;
       addonDescs.push("a voice and tone guide");
     }
     if (calcRoot.querySelector('[data-addon="brandFoundation"]').checked) {
-      oneTime += 2400;
+      oneTime += EXTRAS.brandFoundation;
       addonDescs.push("Brand Foundation");
     }
     if (calcRoot.querySelector('[data-addon="newSocialPages"]').checked) {
-      oneTime += 300;
+      oneTime += EXTRAS.socialPages;
       addonDescs.push("new social page setup");
     }
     const extraPages = qtyOf("addon-pages");
     if (extraPages > 0) {
-      oneTime += extraPages * 250;
+      oneTime += extraPages * EXTRAS.extraPage;
       addonDescs.push(`${extraPages} extra website page${extraPages > 1 ? "s" : ""}`);
     }
     const updatePacks = qtyOf("addon-packs");
     if (updatePacks > 0) {
-      oneTime += updatePacks * 225;
+      oneTime += updatePacks * EXTRAS.updatePack;
       addonDescs.push(`${updatePacks} Update Pack${updatePacks > 1 ? "s" : ""} (3 small site changes each)`);
     }
 
@@ -307,7 +292,7 @@ if (calcRoot) {
       monthlyPath("website") && monthlyPath("content") && monthlyPath("social") &&
       seatOn("crm") && seatOn("reporting") && calcRoot.querySelector('[data-addon="newsletter"]').checked;
     if (isFullTeam) {
-      const covered = monthlySum * (1 - recurringDiscount) + SEATS.crm.monthly + SEATS.reporting.monthly + 300;
+      const covered = monthlySum * (1 - recurringDiscount) + SEATS.crm.monthly + SEATS.reporting.monthly + EXTRAS.newsletter;
       monthly = monthly - covered + FULL_TEAM_PRICE;
     }
 

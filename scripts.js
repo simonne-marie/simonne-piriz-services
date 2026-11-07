@@ -7,9 +7,8 @@ if (header) {
 
 const inquiryForm = document.getElementById("inquiry-form");
 if (inquiryForm) {
-  const HUBSPOT_PORTAL_ID = "247415032";
-  const HUBSPOT_FORM_GUID = "aaf4361b-1fa4-46fd-ae8f-df87d05dfd4a";
-  const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
+  // The site's Worker (worker/index.js) passes this to the HubSpot "inquiry" form and runs the follow-ups.
+  const SUBMIT_ENDPOINT = "/api/submit";
   const SERVICES_FIELD_NAME = "0-1/strong_which_service_s__are_you_interested_in___strong_";
 
   const submitBtn = document.getElementById("inquiry-submit");
@@ -57,10 +56,11 @@ if (inquiryForm) {
     submitBtn.textContent = "Sending...";
 
     try {
-      const response = await fetch(HUBSPOT_ENDPOINT, {
+      const response = await fetch(SUBMIT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          form: "inquiry",
           fields,
           context: {
             pageUri: window.location.href,

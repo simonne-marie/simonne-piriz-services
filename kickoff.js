@@ -3,10 +3,9 @@
   const root = document.getElementById("kick-form");
   if (!root) return;
 
-  // HubSpot form "Kickoff Brief" (all fields are contact properties).
-  const HUBSPOT_PORTAL_ID = "247415032";
-  const HUBSPOT_FORM_GUID = "a3e9a2de-1ff1-4b99-aefc-8aa841bc9caa";
-  const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
+  // The site's Worker (worker/index.js) passes this to the HubSpot "Kickoff Brief" form
+  // (all fields are contact properties) and runs the follow-ups.
+  const SUBMIT_ENDPOINT = "/api/submit";
   const DRAFT_KEY = "sp-kickoff-draft-v1";
 
   /* ---------- Visual libraries ---------- */
@@ -431,11 +430,6 @@
       statusEl.textContent = "Please check the box to agree before sending.";
       return;
     }
-    if (!HUBSPOT_FORM_GUID) {
-      statusEl.className = "form-status is-error";
-      statusEl.textContent = "This form isn’t connected yet. Please email simonnemv@gmail.com and I’ll send you a link that works.";
-      return;
-    }
     const hutk = (document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/) || [])[1];
     const fields = [
       ["0-1/email", a.email], ["0-1/firstname", a.firstname], ["0-1/lastname", a.lastname], ["0-1/phone", a.phone],
@@ -449,10 +443,10 @@
     nextBtn.disabled = true;
     nextBtn.textContent = "Sending...";
     try {
-      const response = await fetch(HUBSPOT_ENDPOINT, {
+      const response = await fetch(SUBMIT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fields, context: { pageUri: window.location.href, pageName: document.title, ...(hutk ? { hutk } : {}) } }),
+        body: JSON.stringify({ form: "kickoff", fields, context: { pageUri: window.location.href, pageName: document.title, ...(hutk ? { hutk } : {}) } }),
       });
       if (!response.ok) throw new Error("Submission failed");
       try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}

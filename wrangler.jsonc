@@ -1,8 +1,21 @@
 {
   "name": "simonne-piriz-services",
   "compatibility_date": "2026-10-06",
+  // Handles /api/submit (form automation); everything else is the static site.
+  "main": "worker/index.js",
   "assets": {
-    "directory": "./"
+    "directory": "./",
+    "binding": "ASSETS"
   },
+  // Secrets (SLACK_BOT_TOKEN, SLACK_CHANNEL, HUBSPOT_TOKEN, GOOGLE_*) live in Cloudflare.
+  // See worker/README.md.
+  "vars": {
+    "FOLLOW_UP_TIMEZONE": "America/New_York",
+    "HUBSPOT_PIPELINE": "default",
+    "HUBSPOT_DEAL_STAGE": "appointmentscheduled",
+    "HUBSPOT_KICKOFF_STAGE": "decisionmakerboughtin",
+    "GOOGLE_CALENDAR_ID": "primary"
+  },
+  "observability": { "enabled": true },
   "previews": {}
 }

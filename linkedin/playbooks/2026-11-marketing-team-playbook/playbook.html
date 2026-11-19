@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Marketing Team Playbook</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  @page { size: 1080px 1350px; margin: 0; }
+  :root {
+    --bg: #ffffff;
+    --bg-dark: #191919;
+    --panel: #212121;
+    --text: #191919;
+    --text-inverse: #ffffff;
+    --muted: #5c5c5c;
+    --muted-inverse: #b8b8b8;
+    --accent: oklch(68% 0.19 40);
+    --accent-ink: oklch(55% 0.19 40);
+    --border: #e4e4e4;
+    --border-dark: #333333;
+    --card-bg: #f7f6f4;
+    --card-icon-bg: #fbeee7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg-dark); }
+  body { font-family: "Instrument Sans", sans-serif; color: var(--text); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .page {
+    position: relative; width: 1080px; height: 1350px; overflow: hidden;
+    padding: 80px 80px 72px; display: flex; flex-direction: column;
+    background: var(--card-bg); break-after: page;
+  }
+  .page:last-child { break-after: auto; }
+  .dark {
+    background-color: var(--bg-dark); color: var(--text-inverse);
+    background-image:
+      radial-gradient(circle at 92% 6%, color-mix(in oklch, var(--accent) 28%, transparent) 0, transparent 36%),
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: auto, 54px 54px, 54px 54px;
+  }
+
+  /* running header + footer */
+  .run { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .dark .run { color: var(--muted-inverse); }
+  .run .sec { color: var(--accent-ink); }
+  .dark .run .sec { color: var(--accent); }
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1.5px solid var(--border); font-size: 18px; color: var(--muted); }
+  .dark .foot { border-top-color: var(--border-dark); color: var(--muted-inverse); }
+  .foot .brand { display: flex; align-items: center; gap: 12px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; color: var(--text); }
+  .dark .foot .brand { color: var(--text-inverse); }
+  .foot .brand img { width: 34px; height: 34px; border-radius: 7px; }
+
+  .page:not(.cover) > .kicker, .page > h2.first { margin-top: auto; }
+  .kicker { margin-top: 56px; font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--accent-ink); }
+  .dark .kicker { color: var(--accent); }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", sans-serif; letter-spacing: -0.02em; }
+  h2 { margin-top: 16px; font-weight: 800; font-size: 68px; line-height: 1.02; }
+  h2 em, h1 em { font-style: normal; color: var(--accent-ink); }
+  .dark h2 em, .dark h1 em { color: var(--accent); }
+  .lede { margin-top: 22px; font-size: 26px; line-height: 1.45; color: var(--muted); max-width: 880px; }
+  .dark .lede { color: var(--muted-inverse); }
+
+  .card { background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px 32px; }
+  .card h3 { font-weight: 700; font-size: 29px; line-height: 1.15; }
+  .card p { margin-top: 10px; font-size: 21px; line-height: 1.45; color: var(--muted); }
+  .tag { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 16px; color: var(--accent-ink); background: var(--card-icon-bg); border-radius: 8px; padding: 5px 10px; margin-bottom: 14px; }
+  .tip { margin-top: 28px; background: var(--card-icon-bg); border-radius: 18px; padding: 24px 30px; font-size: 22px; line-height: 1.45; }
+  .tip b { font-family: "Bricolage Grotesque", sans-serif; color: var(--accent-ink); letter-spacing: 0.06em; text-transform: uppercase; font-size: 17px; display: block; margin-bottom: 6px; }
+  .dark .tip { background: #2a221e; color: var(--text-inverse); }
+  .dark .tip b { color: var(--accent); }
+
+  /* cover */
+  .cover-top { display: flex; justify-content: space-between; align-items: center; }
+  .cover-top .brand { display: flex; align-items: center; gap: 16px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 24px; }
+  .cover-top .brand img { width: 60px; height: 60px; border-radius: 10px; }
+  .pill { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 1.5px solid var(--accent); border-radius: 999px; padding: 9px 18px; }
+  .cover h1 { margin-top: 150px; font-weight: 800; font-size: 112px; line-height: 0.96; letter-spacing: -0.035em; }
+  .cover .lede { font-size: 30px; margin-top: 34px; max-width: 820px; }
+  .inside { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 40px; padding: 34px 0 40px; border-top: 1px solid var(--border-dark); }
+  .inside div { font-size: 22px; color: var(--muted-inverse); display: flex; gap: 14px; }
+  .inside div span { font-family: "JetBrains Mono", monospace; color: var(--accent); font-size: 19px; padding-top: 2px; }
+  .cover-foot { display: flex; justify-content: space-between; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-inverse); }
+  .orb { position: absolute; right: -150px; top: 700px; width: 400px; height: 400px; border-radius: 50%; background: var(--accent); }
+  .orb::after { content: ""; position: absolute; left: 60px; bottom: 40px; width: 92px; height: 92px; border-radius: 50%; background: #ffffff; }
+  .cover h1, .cover .lede { position: relative; }
+
+  /* intro */
+  .intro { display: grid; grid-template-columns: 300px 1fr; gap: 50px; margin-top: 56px; align-items: start; }
+  .intro img { width: 300px; height: 360px; object-fit: cover; border-radius: 22px; }
+  .intro p { font-size: 25px; line-height: 1.55; color: #2e2e2e; }
+  .intro p + p { margin-top: 20px; }
+  .sig { margin-top: 26px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 26px; }
+  .sig span { display: block; font-family: "Instrument Sans", sans-serif; font-weight: 500; font-size: 19px; color: var(--muted); margin-top: 2px; }
+  .creds { margin-top: 48px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .creds span { font-size: 19px; font-weight: 600; border: 1.5px solid var(--border); background: var(--bg); border-radius: 999px; padding: 9px 18px; }
+
+  /* stack diagram */
+  .stack { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stack .hub { grid-column: 1 / -1; background: var(--bg-dark); color: var(--text-inverse); border: 0; display: flex; gap: 28px; align-items: center; }
+  .stack .hub .num { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 72px; color: var(--accent); line-height: 1; }
+  .stack .hub p { color: var(--muted-inverse); }
+  .stack .card .num { font-family: "JetBrains Mono", monospace; font-size: 18px; color: var(--accent-ink); }
+  .stack .card h3 { margin-top: 8px; }
+  .connector { grid-column: 1 / -1; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 17px; color: var(--muted); margin: -6px 0; }
+
+  /* checklist */
+  .checks { margin-top: 40px; display: grid; gap: 14px; }
+  .check { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; }
+  .box { width: 36px; height: 36px; border-radius: 9px; border: 2px solid var(--accent); display: grid; place-items: center; color: var(--accent-ink); font-weight: 700; }
+  .check h3 { font-size: 25px; font-weight: 700; }
+  .check p { margin-top: 4px; font-size: 20px; color: var(--muted); line-height: 1.4; }
+
+  /* review loop */
+  .loop { margin-top: 40px; display: grid; gap: 0; position: relative; }
+  .step { display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding-bottom: 26px; position: relative; }
+  .step:not(:last-child)::before { content: ""; position: absolute; left: 31px; top: 64px; bottom: 0; width: 2px; background: repeating-linear-gradient(var(--border-dark) 0 6px, transparent 6px 12px); }
+  .step .n { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--accent); display: grid; place-items: center; font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--accent); }
+  .step:last-child .n { background: var(--accent); color: var(--bg-dark); }
+  .step h3 { font-size: 30px; font-weight: 700; padding-top: 8px; }
+  .step p { margin-top: 4px; font-size: 21px; color: var(--muted-inverse); line-height: 1.4; }
+  .slack { margin-top: 6px; background: #ffffff; color: var(--text); border-radius: 18px; padding: 22px 26px; display: grid; grid-template-columns: 52px 1fr; gap: 18px; box-shadow: 0 24px 50px rgba(0,0,0,0.35); }
+  .slack .av { width: 52px; height: 52px; border-radius: 12px; background: var(--accent); display: grid; place-items: center; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 24px; color: var(--bg-dark); }
+  .slack .who { font-weight: 700; font-size: 19px; }
+  .slack .who span { font-weight: 500; color: var(--muted); font-size: 16px; margin-left: 8px; }
+  .slack .title { margin-top: 6px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 24px; }
+  .slack .sum { margin-top: 4px; font-size: 18px; color: var(--muted); }
+  .slack .btn { display: inline-block; margin-top: 12px; font-size: 16px; font-weight: 700; border: 1.5px solid var(--border); border-radius: 8px; padding: 6px 14px; }
+
+  /* seats */
+  .seats { margin-top: 40px; display: grid; gap: 18px; }
+  .seat { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .seat .h { grid-column: 1 / -1; padding: 22px 28px 0; display: flex; align-items: baseline; gap: 16px; }
+  .seat .h .num { font-family: "JetBrains Mono", monospace; font-size: 18px; color: var(--accent-ink); }
+  .seat .h h3 { font-size: 30px; font-weight: 700; }
+  .seat .col { padding: 14px 28px 24px; }
+  .seat .col b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .seat .col.you b { color: var(--accent-ink); }
+  .seat .col p { font-size: 20px; line-height: 1.4; }
+
+  /* code excerpt */
+  .term { margin-top: 36px; background: var(--panel); border: 1px solid var(--border-dark); border-radius: 20px; overflow: hidden; }
+  .term-bar { display: flex; align-items: center; gap: 9px; padding: 15px 22px; border-bottom: 1px solid var(--border-dark); font-family: "JetBrains Mono", monospace; font-size: 16px; color: #8a8a8a; }
+  .dot { width: 13px; height: 13px; border-radius: 50%; background: #3d3d3d; }
+  .dot:first-child { background: var(--accent); }
+  .term-bar .path { margin-left: 14px; }
+  .term pre { padding: 26px 30px; font-family: "JetBrains Mono", monospace; font-size: 19.5px; line-height: 1.6; color: #e9e9e9; white-space: pre-wrap; }
+  .term pre .c { color: #8a8a8a; }
+  .term pre .a { color: var(--accent); }
+
+  /* intake */
+  .swatches { margin-top: 36px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sw { border-radius: 16px; height: 150px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 18px; }
+  .facts { margin-top: 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .facts .card { padding: 24px 26px; }
+  .facts b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 46px; line-height: 1; color: var(--accent-ink); }
+  .facts span { display: block; margin-top: 8px; font-size: 19px; color: var(--muted); line-height: 1.35; }
+
+  /* commands */
+  .rows { padding: 6px 30px; }
+  .row { display: grid; grid-template-columns: 52px 1fr; column-gap: 8px; padding: 17px 0; border-bottom: 1px dashed #343434; }
+  .row:last-child { border-bottom: 0; }
+  .row .num { font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--accent); padding-top: 4px; }
+  .row .cmd { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 28px; color: var(--text-inverse); }
+  .row .cmd .p { color: var(--accent); }
+  .row .desc { grid-column: 2; margin-top: 4px; font-size: 21px; color: var(--muted-inverse); line-height: 1.35; }
+
+  /* misses */
+  .misses { margin-top: 40px; display: grid; gap: 16px; }
+  .miss { display: grid; grid-template-columns: 56px 1fr; gap: 22px; background: var(--panel); border: 1px solid var(--border-dark); border-radius: 18px; padding: 24px 28px; }
+  .miss .n { font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--accent); padding-top: 6px; }
+  .miss h3 { font-size: 29px; font-weight: 700; }
+  .miss p { margin-top: 6px; font-size: 20.5px; color: var(--muted-inverse); line-height: 1.42; }
+
+  /* rollout */
+  .days { margin-top: 40px; display: grid; gap: 14px; }
+  .day { display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: 22px 26px; }
+  .day .d { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 34px; color: var(--accent-ink); line-height: 1; }
+  .day .d span { display: block; font-family: "JetBrains Mono", monospace; font-weight: 400; font-size: 15px; color: var(--muted); margin-top: 6px; }
+  .day h3 { font-size: 26px; font-weight: 700; }
+  .day p { margin-top: 4px; font-size: 20px; color: var(--muted); line-height: 1.4; }
+
+  /* proof */
+  .stats { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .stat { background: var(--panel); border: 1px solid var(--border-dark); border-radius: 20px; padding: 30px 32px; }
+  .stat b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 76px; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+  .stat span { display: block; margin-top: 10px; font-size: 22px; color: var(--muted-inverse); line-height: 1.35; }
+  .cta { margin-top: 36px; background: var(--accent); color: var(--bg-dark); border-radius: 22px; padding: 34px 36px; }
+  .cta h3 { font-weight: 800; font-size: 42px; line-height: 1.05; }
+  .cta p { margin-top: 12px; font-size: 23px; line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<!-- 01 Cover -->
+<section class="page dark cover">
+  <div class="cover-top">
+    <div class="brand"><img src="../../../assets/logo.png" alt=""><span>Simonne Piriz Studio</span></div>
+    <div class="pill">Free playbook</div>
+  </div>
+  <div class="orb" aria-hidden="true"></div>
+  <h1>The small business<br>marketing team<br><em>playbook.</em></h1>
+  <p class="lede">Build one connected system, put agents on the busywork, and approve everything before it goes live.</p>
+  <div class="inside">
+    <div><span>01</span>The 4 pieces every small business needs</div>
+    <div><span>02</span>The review loop that keeps agents honest</div>
+    <div><span>03</span>3 agent seats to start with</div>
+    <div><span>04</span>A 5-day rollout plan</div>
+  </div>
+  <div class="cover-foot"><span>November 2026 edition</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 02 Intro -->
+<section class="page">
+  <div class="run"><span class="sec">Before you start</span><span>02</span></div>
+  <h2 class="first">You don't need a marketing hire. You need a <em>system.</em></h2>
+  <div class="intro">
+    <img src="../../../assets/simonne.jpg" alt="Simonne Piriz">
+    <div>
+      <p>I've spent over a decade building marketing systems for SaaS and healthcare companies, some of them at Atlassian scale.</p>
+      <p>This playbook is that same thinking, sized for a small business. It's the exact setup I use to run my own studio, with real examples from what I've built.</p>
+      <p>Take what's useful. If you get stuck, ask me. I'm happy to help.</p>
+      <div class="sig">Simonne Piriz<span>Founder, Simonne Piriz Studio</span></div>
+    </div>
+  </div>
+  <div class="creds"><span>Marketing operations</span><span>CRM architecture</span><span>Lifecycle &amp; routing</span><span>AI agents with human review</span></div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 03 The 4 pieces -->
+<section class="page">
+  <div class="run"><span class="sec">01 · The stack</span><span>03</span></div>
+  <p class="kicker">// one connected system</p>
+  <h2>The 4 pieces every small business needs.</h2>
+  <p class="lede">Most businesses have some of these. The win is connecting them so each one feeds the next.</p>
+  <div class="stack">
+    <div class="card hub"><div class="num">1</div><div><h3>Brand documents</h3><p>Positioning, voice, color and type. The instruction manual everything else works from.</p></div></div>
+    <div class="connector">↓ feeds ↓</div>
+    <div class="card"><div class="num">02</div><h3>Website</h3><p>Where people decide if you're credible. It should actually get updated.</p></div>
+    <div class="card"><div class="num">03</div><h3>CRM</h3><p>Every form and inquiry lands in one place, so no lead slips.</p></div>
+    <div class="card" style="grid-column:1/-1"><div class="num">04</div><h3>Content &amp; social</h3><p>A steady cadence built from your blog and business updates, not from scratch every week.</p></div>
+  </div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 04 Brand docs -->
+<section class="page">
+  <div class="run"><span class="sec">01 · The stack</span><span>04</span></div>
+  <p class="kicker">// start here</p>
+  <h2>Your brand doc is your agents' <em>instruction manual.</em></h2>
+  <div class="checks">
+    <div class="check"><div class="box">✓</div><div><h3>Positioning &amp; messaging</h3><p>Who you serve, what you do, and why you over the alternative. One paragraph.</p></div></div>
+    <div class="check"><div class="box">✓</div><div><h3>Voice &amp; tone</h3><p>Three words that describe how you sound, with one "we say this, not that" example each.</p></div></div>
+    <div class="check"><div class="box">✓</div><div><h3>Words you never use</h3><p>The jargon, clichés and claims that don't sound like you.</p></div></div>
+    <div class="check"><div class="box">✓</div><div><h3>Color, type &amp; theme</h3><p>Exact colors and fonts, so every graphic and page matches.</p></div></div>
+    <div class="check"><div class="box">✓</div><div><h3>Proof you can point to</h3><p>Results, credentials and examples agents are allowed to use. Nothing invented.</p></div></div>
+  </div>
+  <div class="tip"><b>The test</b>If a new hire couldn't write a good post from your brand doc, an agent can't either.</div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 05 Review loop -->
+<section class="page dark">
+  <div class="run"><span class="sec">02 · The review loop</span><span>05</span></div>
+  <p class="kicker">// proof, not principle</p>
+  <h2>Everyone says "human in the loop." Here's what <em>mine</em> looks like.</h2>
+  <div class="loop">
+    <div class="step"><div class="n">01</div><div><h3>The agent drafts on a copy</h3><p>Every website change starts on a separate branch. The live site isn't touched.</p></div></div>
+    <div class="step"><div class="n">02</div><div><h3>It asks to go live</h3><p>A pull request opens, and my Slack bot, Vinny, posts a review card.</p>
+      <div class="slack"><div class="av">V</div><div><div class="who">Vinny <span>review card</span></div><div class="title">Add a sitemap for search engines</div><div class="sum">1 file changed · ready for review</div><span class="btn">Review the PR</span></div></div>
+    </div></div>
+    <div class="step"><div class="n">03</div><div><h3>I review, then merge</h3><p>Merging is the moment it goes live. Nothing ships without a yes.</p></div></div>
+  </div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 06 Seats -->
+<section class="page">
+  <div class="run"><span class="sec">03 · Agent seats</span><span>06</span></div>
+  <p class="kicker">// clear job, clear output</p>
+  <h2>3 agent seats to start with.</h2>
+  <p class="lede">Think in seats, not tools. Each one has a job, and a human owns the result.</p>
+  <div class="seats">
+    <div class="seat"><div class="h"><span class="num">01</span><h3>Website</h3></div>
+      <div class="col"><b>Agent handles</b><p>Drafting updates, new pages and routine fixes.</p></div>
+      <div class="col you"><b>You handle</b><p>Strategy, design direction and final review.</p></div></div>
+    <div class="seat"><div class="h"><span class="num">02</span><h3>Content &amp; blog</h3></div>
+      <div class="col"><b>Agent handles</b><p>Topic research, first drafts and scheduling.</p></div>
+      <div class="col you"><b>You handle</b><p>Accuracy, voice and the strategy behind what gets written.</p></div></div>
+    <div class="seat"><div class="h"><span class="num">03</span><h3>Social</h3></div>
+      <div class="col"><b>Agent handles</b><p>Planning, drafting and scheduling from your blog.</p></div>
+      <div class="col you"><b>You handle</b><p>Voice, review, and what to post and when.</p></div></div>
+  </div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 07 Skills -->
+<section class="page">
+  <div class="run"><span class="sec">03 · Agent seats</span><span>07</span></div>
+  <p class="kicker">// write it down once</p>
+  <h2>Teach the agent your workflow in <em>plain English.</em></h2>
+  <p class="lede">A skill is one file the agent reads before it does a job. Here's part of the real one I use to publish my site.</p>
+  <div class="term">
+    <div class="term-bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="path">.claude/skills/update-site/SKILL.md</span></div>
+<pre><span class="a">## Step 5: Pull request</span>
+Say: "Opening a pull request - this asks for the
+change to be added to the live site. Vinny will
+post a review card for it in Slack."
+
+<span class="a">## Step 6: Review and merge</span>
+<span class="c">Stop here and let Simonne review.</span>
+Only merge it yourself if she asks.</pre>
+  </div>
+  <div class="tip"><b>Side effect</b>If you can't write the steps down, an agent can't follow them. Writing them down usually exposes the step you've been skipping.</div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 08 Intake -->
+<section class="page">
+  <div class="run"><span class="sec">01 · The stack</span><span>08</span></div>
+  <p class="kicker">// intake → CRM</p>
+  <h2>Make your intake form do the <em>first draft.</em></h2>
+  <p class="lede">My Kickoff Brief asks people to pick what they like instead of describing it, then lands in HubSpot as a brief I can read in minutes.</p>
+  <div class="swatches">
+    <div class="sw" style="background:#efe6d8;color:#3b3a2a">Warm &amp; Organic</div>
+    <div class="sw" style="background:#ffde3b;color:#0d0d0d">Bold &amp; Graphic</div>
+    <div class="sw" style="background:#141210;color:#efe8dc">Luxe &amp; Editorial</div>
+    <div class="sw" style="background:#0c1016;color:#3ee08f">Tech &amp; Precise</div>
+  </div>
+  <div class="facts">
+    <div class="card"><b>8</b><span>visual styles to choose from, plus fonts and palettes</span></div>
+    <div class="card"><b>~20</b><span>minutes, and answers save as you go</span></div>
+    <div class="card"><b>1</b><span>ready-to-read brief in the CRM, per submission</span></div>
+  </div>
+  <div class="tip"><b>Try this</b>Ask visual questions, not adjectives. "Modern" means something different to everyone. A picked example doesn't.</div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 09 Where agents fall short -->
+<section class="page dark">
+  <div class="run"><span class="sec">02 · The review loop</span><span>09</span></div>
+  <p class="kicker">// what the demos skip</p>
+  <h2>Where agents still fall short, and <em>what I check.</em></h2>
+  <div class="misses">
+    <div class="miss"><div class="n">01</div><div><h3>They're confidently wrong.</h3><p>An agent-written note in my own setup named the wrong website as the live one. Now my publishing skill names the right domain, and says which one isn't it.</p></div></div>
+    <div class="miss"><div class="n">02</div><div><h3>They'll invent proof.</h3><p>My Kickoff Brief tells agents in writing: don't invent reviews, numbers, credentials or results. Leave a marked placeholder instead.</p></div></div>
+    <div class="miss"><div class="n">03</div><div><h3>They don't notice contradictions.</h3><p>A playful voice with formal fonts will get built as-is. I added a step that flags answers that pull against each other, to settle with a person first.</p></div></div>
+    <div class="miss"><div class="n">04</div><div><h3>They default to generic.</h3><p>The first draft of an intro post for this series was the same "AI drafts, a human approves" diagram everyone posts. It got cut.</p></div></div>
+  </div>
+  <div class="tip"><b>What stays with me</b>Positioning, pricing, what gets published and when. Agents speed up the work. They don't make the calls.</div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 10 Rollout -->
+<section class="page">
+  <div class="run"><span class="sec">04 · Rollout</span><span>10</span></div>
+  <p class="kicker">// one piece a day</p>
+  <h2>Your 5-day rollout plan.</h2>
+  <div class="days">
+    <div class="day"><div class="d">Day 1<span>brand</span></div><div><h3>Write your brand doc</h3><p>Use the checklist on page 4. An hour of honest notes beats a perfect PDF.</p></div></div>
+    <div class="day"><div class="d">Day 2<span>measure</span></div><div><h3>Turn on measurement</h3><p>Analytics, a tag manager and a sitemap, and update your privacy policy to match.</p></div></div>
+    <div class="day"><div class="d">Day 3<span>capture</span></div><div><h3>Connect intake to your CRM</h3><p>Every form sends to one place. Test it with a real submission.</p></div></div>
+    <div class="day"><div class="d">Day 4<span>review</span></div><div><h3>Set up your review loop</h3><p>Decide where drafts wait and who says yes. Nothing goes live without it.</p></div></div>
+    <div class="day"><div class="d">Day 5<span>teach</span></div><div><h3>Write your first skill</h3><p>Pick the task you repeat most and write the steps the way you'd explain them to a new hire.</p></div></div>
+  </div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+<!-- 11 Proof + CTA -->
+<section class="page dark">
+  <div class="run"><span class="sec">What it built</span><span>11</span></div>
+  <p class="kicker">// receipts</p>
+  <h2>I run my own studio on <em>this exact system.</em></h2>
+  <div class="stats">
+    <div class="stat"><b>19</b><span>website updates shipped live, every one reviewed first</span></div>
+    <div class="stat"><b>9 wks</b><span>from first commit to a full site, intake and CRM</span></div>
+    <div class="stat"><b>1</b><span>Slack review bot, so nothing ships without a yes</span></div>
+    <div class="stat"><b>1</b><span>intake brief that lands in HubSpot, ready to build from</span></div>
+  </div>
+  <div class="cta">
+    <h3>Stuck on a page? Ask me.</h3>
+    <p>Comment on the post or send me a message. I'm happy to walk you through any of this, or set it up with you.</p>
+  </div>
+  <div class="foot"><span class="brand"><img src="../../../assets/logo.png" alt="">Simonne Piriz Studio</span><span>simonnepirizstud.io</span></div>
+</section>
+
+</body>
+</html>
